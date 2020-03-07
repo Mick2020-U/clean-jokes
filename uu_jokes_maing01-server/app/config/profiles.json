@@ -13,7 +13,8 @@
       "defaultUve": ["Public"],
       "joke/create": ["Executives","Readers","Authorities"],
       "joke/list": ["Public"],
-      "joke/update": ["Public"]
+      "joke/update": ["Public"],
+      "joke/delete": ["Public"]
     }
   }
 }
