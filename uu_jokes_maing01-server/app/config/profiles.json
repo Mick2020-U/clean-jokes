@@ -12,7 +12,8 @@
       "init": ["AwidOwner"],
       "defaultUve": ["Public"],
       "joke/create": ["Executives","Readers","Authorities"],
-      "joke/list": ["Public"]
+      "joke/list": ["Public"],
+      "joke/update": ["Public"]
     }
   }
 }
