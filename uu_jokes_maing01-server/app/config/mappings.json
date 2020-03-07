@@ -15,6 +15,11 @@
         "realization": "api/controllers/JokeController.create",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "joke/list": {
+        "realization": "api/controllers/JokeController.list",
+        "httpMethod": "GET",
+        "type": "CMD"
       }
     }
   }

@@ -11,7 +11,8 @@
     "useCaseMap": {
       "init": ["AwidOwner"],
       "defaultUve": ["Public"],
-      "joke/create": ["Executives", "Readers", "Authorities"]
+      "joke/create": ["Executives","Readers","Authorities"],
+      "joke/list": ["Public"]
     }
   }
 }
