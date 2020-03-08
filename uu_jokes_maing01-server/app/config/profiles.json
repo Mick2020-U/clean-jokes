@@ -14,7 +14,19 @@
       "joke/create": ["Executives","Readers","Authorities"],
       "joke/list": ["Public"],
       "joke/update": ["Public"],
-      "joke/delete": ["Public"]
+      "joke/delete": ["Public"],
+      "uu-app-binarystore/createBinary": ["Public"],
+      "uu-app-binarystore/getBinary": ["Public"],
+      "uu-app-binarystore/getBinaryData": ["Public"],
+      "uu-app-binarystore/updateBinaryData": ["Public"],
+      "uu-app-binarystore/updateBinary": ["Public"],
+      "uu-app-binarystore/deleteBinary": ["Public"],
+      "uu-app-binarystore/listBinaries": ["Public"],
+      "uu-app-binarystore/getBinaryVersion": ["Public"],
+      "uu-app-binarystore/updateBinaryVersion": ["Public"],
+      "uu-app-binarystore/getBinaryVersionData": ["Public"],
+      "uu-app-binarystore/deleteBinaryVersion": ["Public"],
+      "uu-app-binarystore/listBinaryVersions": ["Public"]
     }
   }
 }

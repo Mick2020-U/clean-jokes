@@ -11,6 +11,16 @@
           "realization": "dao/JokeMongo"
         }
       }
+    },
+    "binary": {
+      "type": "uuAppBinaryStore",
+      "realization": "MongoDB",
+      "schemaMap": {
+        "image": {
+          "realization": "dao/ImageMongoDB",
+          "maxNoi": 1024
+        }
+      }
     }
   }
 }
