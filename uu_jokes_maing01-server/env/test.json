@@ -1,4 +1,7 @@
 {
+  "uuSubAppDataStoreMap": {
+    "primary": "mongodb://127.0.0.1:27017/UuJokesOS"
+  },
   "privilegedUserMap": {
     "asidOwner": "14-2710-1"
   },
