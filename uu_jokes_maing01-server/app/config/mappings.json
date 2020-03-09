@@ -30,6 +30,11 @@
         "realization": "api/controllers/JokeController.delete",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "category/create": {
+        "realization": "api/controllers/CategoryController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }

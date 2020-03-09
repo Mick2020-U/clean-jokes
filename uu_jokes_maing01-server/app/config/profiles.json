@@ -1,10 +1,11 @@
 {
   "{asid}": {
-    "profileList": ["AsidOwner"],
+    "profileList": ["Authorities","Executives","AwidOwner"],
     "permissionMap": {
       "{asidOwner}": ["AsidOwner"]
     },
-    "useCaseMap": {}
+    "useCaseMap": {
+    }
   },
   "*": {
     "profileList": ["Authorities","Executives","AwidOwner"],
@@ -15,6 +16,7 @@
       "joke/list": ["Public"],
       "joke/update": ["Public"],
       "joke/delete": ["Public"],
+      "category/create": ["Public"],
       "uu-app-binarystore/createBinary": ["Public"],
       "uu-app-binarystore/getBinary": ["Public"],
       "uu-app-binarystore/getBinaryData": ["Public"],

@@ -9,6 +9,9 @@
         },
         "joke": {
           "realization": "dao/JokeMongo"
+        },
+        "category": {
+          "realization": "dao/CategoryMongo"
         }
       }
     },
