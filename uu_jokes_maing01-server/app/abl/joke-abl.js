@@ -75,7 +75,7 @@ class JokeAbl {
     return dtoOut;
   }
 
-  async create(awid, dtoIn, authorizationResult,session) {
+  async create(awid, dtoIn, authorizationResult, session) {
     let validationResult = this.validator.validate("createJokeDtoInType", dtoIn);
 
     let uuAppErrorMap = ValidationHelper.processValidationResult(
@@ -86,8 +86,8 @@ class JokeAbl {
     );
     dtoIn.awid = awid;
     dtoIn.visibility = authorizationResult.getAuthorizedProfiles().includes(AUTHORITIES_PROFILE);
-    dtoIn.uuIdentity = session.getIdentity().getUuIdentity();
-    dtoIn.uuIdentityName = session.getIdentity().getName();
+    // dtoIn.uuIdentity = session.getIdentity().getUuIdentity();
+    // dtoIn.uuIdentityName = session.getIdentity().getName();
     let dtoOut;
     try {
       dtoOut = await this.dao.create(dtoIn);

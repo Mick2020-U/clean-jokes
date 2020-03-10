@@ -1,7 +1,7 @@
 {
   "port": 8080,
   "uuSubAppDataStoreMap": {
-    "primary": "mongodb://127.0.0.1:27017/UuJokesOS",
+    "primary": "mongodb://127.0.0.1:27017/JokesMainPrimary",
     "binary": "mongodb://127.0.0.1:27017/JokesMainBinary"
   },
   "privilegedUserMap": {
