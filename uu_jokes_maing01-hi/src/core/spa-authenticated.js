@@ -91,7 +91,7 @@ const SpaAuthenticated = UU5.Common.VisualComponent.create({
         leftWidth="!xs-320px !s-320px !m-256px l-256px xl-256px"
       >
         <UU5.Common.Fragment>
-          <Content identity={this.props.identity} semaforStatus={this.state.semaforStatus}/>
+          <Content identity={this.props.identity} semaforStatus={this.state.semaforStatus} clickFunc={this._handleButtonClick}/>
           <UU5.Bricks.Button content="Change Semafor" onClick={this._handleButtonClick}/>
         </UU5.Common.Fragment>
         <UU5.Common.Router

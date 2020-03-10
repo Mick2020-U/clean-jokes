@@ -33,6 +33,21 @@ export const Content = UU5.Common.VisualComponent.create({
       semaforStatus: this.props.semaforStatus || "green"
     };
   },
+  componentWillReceiveProps(nextProps){
+    console.log(nextProps, "Will receive props");
+  },
+  componentDidMount(){
+    console.log(new Date(),"didMount");
+    setInterval(()=> {
+      this.props.clickFunc();
+    },3000)
+  },
+  componentDidUpdate(prevProps, nextProps) {
+    console.log(prevProps === nextProps);
+  },
+  componentWillUnmount(){
+    console.log("WillUnmount");
+  },
   //@@viewOff:reactLifeCycle
 
   //@@viewOn:interface
