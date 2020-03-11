@@ -13,14 +13,15 @@ export const Content = UU5.Common.VisualComponent.create({
   statics: {
     tagName: Config.TAG + "Content",
     classNames: {
-      main: (props, state) => Config.Css.css`background: rgba(0, 0, 0, 0.15); padding: 8px; margin: 8px 0;`
+      main: (props, state) => Config.Css.css``
     }
   },
   //@@viewOff:statics
 
   //@@viewOn:propTypes
   propTypes: {
-    semaforStatus: UU5.PropTypes.oneOf(["red", "redOrange", "green", "orange"])
+    semaphorStatus: UU5.PropTypes.oneOf(["red", "redOrange", "orange", "green"]),
+    onButtonClick: UU5.PropTypes.func
   },
   //@@viewOff:propTypes
 
@@ -29,24 +30,34 @@ export const Content = UU5.Common.VisualComponent.create({
 
   //@@viewOn:reactLifeCycle
   getInitialState() {
+    console.log("getInitialState: ", new Date());
+    let semaphorStatus;
+    if (["red", "redOrange", "orange", "green"].includes(this.props.semaphorStatus)) {
+      semaphorStatus = this.props.semaphorStatus;
+    } else {
+      semaphorStatus = "green";
+    }
     return {
-      semaforStatus: this.props.semaforStatus || "green"
+      semaphorStatus: semaphorStatus
     };
   },
-  componentWillReceiveProps(nextProps){
-    console.log(nextProps, "Will receive props");
+
+  componentDidMount() {
+    console.log("didMount: ", new Date());
+    setInterval(() => this._hangleButtonClick(), 2000);
   },
-  componentDidMount(){
-    console.log(new Date(),"didMount");
-    setInterval(()=> {
-      this.props.clickFunc();
-    },3000)
+
+  componentWillReceiveProps(nextProps) {
+    console.log("will receive props", nextProps);
+    this.setState({ semaphorStatus: this.props.semaphorStatus });
   },
-  componentDidUpdate(prevProps, nextProps) {
-    console.log(prevProps === nextProps);
+
+  componentDidUpdate(prevState, prevProps) {
+    console.log("didUpdate: ", new Date());
   },
-  componentWillUnmount(){
-    console.log("WillUnmount");
+
+  componentWillUnmount() {
+    console.log("willUnmount: ", new Date());
   },
   //@@viewOff:reactLifeCycle
 
@@ -57,31 +68,63 @@ export const Content = UU5.Common.VisualComponent.create({
   //@@viewOff:overriding
 
   //@@viewOn:private
-  _handleButtonClick(opions) {
+  _hangleButtonClick(options) {
     this.setState(prevState => {
       let newState = {};
-      if (prevState.semaforStatus === "green") {
-        newState.semaforStatus = "orange";
-      } else if (prevState.semaforStatus === "orange") {
-        newState.semaforStatus = "red";
-      } else if (prevState.semaforStatus === "red") {
-        newState.semaforStatus = "redOrange"
-      } else if (prevState.semaforStatus === "redOrange") {
-        newState.semaforStatus = "green"
+      if (prevState.semaphorStatus === "green") {
+        newState.semaphorStatus = "orange";
+      } else if (prevState.semaphorStatus === "orange") {
+        newState.semaphorStatus = "red";
+      } else if (prevState.semaphorStatus === "red") {
+        newState.semaphorStatus = "redOrange";
+      } else if (prevState.semaphorStatus === "redOrange") {
+        newState.semaphorStatus = "green";
       }
       return newState;
-    })
+    });
   },
   //@@viewOff:private
 
   //@@viewOn:render
   render() {
-    return <UU5.Bricks.Div {...this.getMainPropsToPass()}>
-      <UU5.Bricks.Badge content="0" colorSchema={this.props.semaforStatus === "red" || this.props.semaforStatus === "redOrange" ? "red" : "gray"}/>
-      <UU5.Bricks.Badge content="0" colorSchema={this.props.semaforStatus === "orange" || this.props.semaforStatus === "redOrange" ? "orange" : "gray"}/>
-      <UU5.Bricks.Badge content="0" colorSchema={this.props.semaforStatus === "green" ? "green" : "gray"}/>
-
-    </UU5.Bricks.Div>;
+    return (
+      <UU5.Bricks.Column {...this.getMainPropsToPass()} width="200px">
+        <UU5.Bricks.Card header="City Lights" className="uu5-common-padding-s" elevation={1}>
+          <UU5.Bricks.Jumbotron
+            content=" "
+            borderRadius={36}
+            colorSchema={
+              this.state.semaphorStatus === "red" || this.state.semaphorStatus === "redOrange" ? "red-rich" : "red"
+            }
+          />
+          <UU5.Bricks.Jumbotron
+            content=" "
+            borderRadius={36}
+            colorSchema={
+              this.state.semaphorStatus === "orange" || this.state.semaphorStatus === "redOrange"
+                ? "orange-rich"
+                : "orange"
+            }
+          />
+          <UU5.Bricks.Jumbotron
+            content=" "
+            borderRadius={36}
+            colorSchema={this.state.semaphorStatus === "green" ? "green-rich" : "green"}
+          />
+        </UU5.Bricks.Card>
+        <UU5.Bricks.ScreenSize>
+          <UU5.Bricks.ScreenSize.Item screenSize="xs">
+            <UU5.Bricks.Span content="Content for XS" />
+          </UU5.Bricks.ScreenSize.Item>
+          <UU5.Bricks.ScreenSize.Item screenSize="s">
+            <UU5.Bricks.Span content="Content for S" />
+          </UU5.Bricks.ScreenSize.Item>
+          <UU5.Bricks.ScreenSize.Item screenSize={["m", "l", "xl"]}>
+            <UU5.Bricks.Span content="Content for M-XL" />
+          </UU5.Bricks.ScreenSize.Item>
+        </UU5.Bricks.ScreenSize>
+      </UU5.Bricks.Column>
+    );
   }
   //@@viewOff:render
 });
