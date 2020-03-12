@@ -2,8 +2,8 @@
 import * as UU5 from "uu5g04";
 import "uu5g04-bricks";
 import Config from "./config/config.js";
+import Context from "./context.js";
 import Lsi from "../routes/joke-detail-lsi.js";
-import Context from "./context";
 //@@viewOff:imports
 
 export const JokeDetailForm = UU5.Common.VisualComponent.create({
@@ -53,21 +53,33 @@ export const JokeDetailForm = UU5.Common.VisualComponent.create({
     alert("Cancel pressed");
     return this;
   },
+
+  _prepareCommonProps(componentName, joke, feedbacks, messages, onChange, onChangeFeedback) {
+    return {
+      name: componentName,
+      value: joke[componentName],
+      feedback: feedbacks[componentName],
+      message: messages[componentName],
+      label: this.getLsiComponent(componentName + "Label"),
+      onChange: onChange,
+      onChangeFeedback: onChangeFeedback
+    };
+  },
   //@@viewOff:private
 
   //@@viewOn:render
   render() {
     return (
       <Context.Consumer>
-        {({ joke, onChange }) => {
+        {({ joke, feedbacks, messages, onChange, onChangeFeedback }) => {
+          let commonParams = [joke, feedbacks, messages, onChange, onChangeFeedback];
           return (
             <UU5.Bricks.Div {...this.getMainPropsToPass()}>
               <UU5.Common.Fragment>
                 <UU5.Bricks.Div className="uu5-common-right">
-                  <UU5.Bricks.LanguageSelector displayedLanguages={["en", "uk"]}/>
+                  <UU5.Bricks.LanguageSelector displayedLanguages={["en", "uk"]} />
                 </UU5.Bricks.Div>
                 <UU5.Forms.Form
-                  values={joke}
                   ref_={form => (this._form = form)}
                   labelColWidth="xs-12 s-12 m-3 l-2 xl-2"
                   inputColWidth="xs-12 s-12 m-8 l-9 xl-9"
@@ -76,79 +88,24 @@ export const JokeDetailForm = UU5.Common.VisualComponent.create({
                   onCancel={({ component }) => this._onCancel(component)}
                 >
                   <UU5.Forms.Text
-                    value="name"
-                    name="name"
+                    {...this._prepareCommonProps("name", ...commonParams)}
                     required={true}
-                    label={this.getLsiComponent("nameLabel")}
                     placeholder={this.getLsiValue("namePlaceholder")}
                     size="s"
-                    onChange={onChange}
                   />
-                  <UU5.Forms.Select
-                    value="city"
-                    name="city"
-                    label="Issue category"
-                    size="s"
-                    multiple={true}
-                    openToContent={true}
-                  >
-                    <UU5.Forms.Select.Option value="prg" content="Prague"/>
-                    <UU5.Forms.Select.Option value="ps" content="Písek"/>
-                    <UU5.Forms.Select.Option value="cb" content="České Budějovice"/>
-                  </UU5.Forms.Select>
                   <UU5.Forms.TextArea
-                    value="text"
-                    name="text"
-                    label={this.getLsiComponent("textLabel")}
+                    {...this._prepareCommonProps("text", ...commonParams)}
                     placeholder={this.getLsiValue("textPlaceholder")}
                     spacing={16}
                     size="s"
                   />
-                  <UU5.Forms.Number
-                    value="number1"
-                    name="number1"
-                    label="Number 1"
-                    size="s"
-                    buttonHidden={true}
-                    valueType="number"
-                    controlled={false}
-                  />
-                  <UU5.Forms.Number
-                    value="number2"
-                    name="number2"
-                    label="Number 2"
-                    size="s"
-                    buttonHidden={true}
-                    valueType="number"
-                    controlled={false}
-                  />
-                  <UU5.Forms.Number
-                    value="result"
-                    name="result"
-                    label="Result"
-                    size="s"
-                    buttonHidden={true}
-                    valueType="number"
-                    controlled={false}
-                  />
-                  <UU5.Forms.DateTimePicker
-                    value="date"
-                    valueType="date"
-                    name="dateOfBirth"
-                    label="Date"
-                    seconds={true}
-                    size="s"
-                    controlled={false}
-                  />
-                  <UU5.Forms.Controls/>
+                  <UU5.Forms.Controls />
                 </UU5.Forms.Form>
               </UU5.Common.Fragment>
             </UU5.Bricks.Div>
-          )
-        }
-        }
+          );
+        }}
       </Context.Consumer>
-
     );
   }
   //@@viewOff:render
