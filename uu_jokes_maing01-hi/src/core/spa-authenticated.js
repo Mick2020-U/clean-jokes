@@ -11,6 +11,7 @@ import About from "../routes/about.js";
 import Home from "../routes/home.js";
 import Content from "./content";
 import Jokes from "../routes/jokes";
+import JokeDetail from "../routes/joke-detail";
 //@@viewOff:imports
 
 const SpaAuthenticated = UU5.Common.VisualComponent.create({
@@ -67,17 +68,18 @@ const SpaAuthenticated = UU5.Common.VisualComponent.create({
         displayedLanguages={["cs", "en"]}
         left={<Left identity={this.props.identity} />}
         leftWidth="!xs-320px !s-320px !m-256px l-256px xl-256px"
-      >
+        modal={<UU5.Bricks.Modal/>}>
+        {/*alertBus={<UU5.Bricks.AlertBus/>}*/}
         <UU5.Common.Router
           routes={{
             "": "jokes",
             jokes: { component: <Jokes identity={this.props.identity} /> },
+            jokeDetail: {component: <JokeDetail identity={this.props.identity} />},
             /*"joke/list" : {component: <Jokes identity={this.props.identity} />},*/
             about: { component: <About identity={this.props.identity} /> },
           }}
           controlled={false}
           notFoundRoute={<Content/>}
-
         />
       </Plus4U5.App.Page>
     );
