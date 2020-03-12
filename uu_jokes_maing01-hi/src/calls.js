@@ -20,6 +20,10 @@ let Calls = {
     let commandUri = Calls.getCommandUri("joke/list");
     return Calls.call("get", commandUri, dtoIn);
   },
+  createJoke (dtoIn) {
+    let commandUri = Calls.getCommandUri("joke/create");
+    return Calls.call("post", commandUri, dtoIn);
+  },
   /*
   For calling command on specific server, in case of developing client site with already deployed
   server in uuCloud etc. You can specify url of this application (or part of url) in development

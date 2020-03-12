@@ -3,7 +3,7 @@ export default {
     en: " Joke Label",
     uk: "Жарт"
   },
-  namePlaceHolder: {
+  textLabel: {
     en: "Add Joke name",
     uk: "Жарту назва"
   },
