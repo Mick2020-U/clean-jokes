@@ -81,7 +81,26 @@ let DeleteJoke = {
   }
 };
 
+const Get = {
+  UC_CODE: `${JokesMainUseCaseError.ERROR_PREFIX}get/`,
+  InvalidDtoIn: class extends JokesMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}invalidDtoIn`;
+      this.message = "DtoIn is not valid.";
+    }
+  },
+  JokeDaoGetFailed: class extends JokesMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}jokeDaoGetFailed`;
+      this.message = "Joke get failed";
+    }
+  }
+};
+
 module.exports = {
+  Get,
   DeleteJoke,
   UpdateJoke,
   JokesList,

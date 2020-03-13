@@ -36,6 +36,9 @@ const WARNINGS = {
       message: "DtoIn contains unsupported keys."
     }
   },
+  jokeGetUnsupportedKeys: {
+    code: `${Errors.Get.UC_CODE}unsupportedKeys`
+  },
 };
 
 class JokeAbl {
@@ -43,6 +46,31 @@ class JokeAbl {
   constructor() {
     this.validator = new Validator(Path.join(__dirname, "..", "api", "validation_types", "joke-types.js"));
     this.dao = DaoFactory.getDao("joke");
+  }
+
+  async get(awid, dtoIn) {
+    let validationResult = this.validator.validate("jokeGetDtoInType", dtoIn);
+    let uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      WARNINGS.jokeGetUnsupportedKeys.code,
+      Errors.Get.InvalidDtoIn
+    );
+
+    let dtoOut;
+    try {
+      dtoOut = await this.dao.get(awid, dtoIn.id);
+    } catch (e) {
+      if (e instanceof ObjectStoreError) { // A3
+        throw new Errors.Get.JokeDaoGetFailed({uuAppErrorMap}, e);
+      }
+      throw e;
+    }
+
+    return {
+      ...dtoOut,
+      uuAppErrorMap
+    };
   }
 
   async list(awid, dtoIn) {

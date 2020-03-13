@@ -25,3 +25,7 @@ const updateJokeDtoInType = shape({
 const deleteJokeDtoInType = shape({
   id: mongoId().isRequired()
 });
+
+const jokeGetDtoInType = shape({
+  id: id()
+});

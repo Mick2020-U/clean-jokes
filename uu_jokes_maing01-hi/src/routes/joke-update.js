@@ -37,35 +37,48 @@ export const JokeUpdate = UU5.Common.VisualComponent.create({
   //@@viewOff:overriding
 
   //@@viewOn:private
-  _onSave({component, values}, handleUpdate) {
-    // component.setPending();
-    typeof handleUpdate === "function" && handleUpdate(values);
-
+  _handleOnSave({ component, values }, handleUpdate) {
+    component.setPending();
+    console.log("handelUpdate");
+    handleUpdate({...values, id:this.props.params.id});
   },
+
+  _handleOnCancel({ component, values }) {
+    console.log("Cancel function");
+  },
+
   _onUpdate(newData) {
+    console.log("newData", newData);
     return new Promise((resolve, reject) => {
-      Calls.createJoke({
+      Calls.updateJoke({
         data: newData,
         done: dtoOut => {
-          this._jokeDetailForm.getForm().setReady();
-          UU5.Environment.getPage()
-            .getAlertBus()
-            .setAlert({
-              content: "Joke created successfully!",
-              colorSchema: "success"
-            });
-          resolve(dtoOut);
+          console.log('this._jokeForm', this._jokeForm);
+          this._jokeForm.getForm().setReady();
+          UU5.Environment.getPage().getAlertBus().setAlert({
+            content: "joke created successfully",
+            colorSchema: "success"
+          });
+          resolve(dtoOut)
         },
         fail: dtoOut => {
-          this._jokeDetailForm.getForm().setReady();
-          UU5.Environment.getPage()
-            .getAlertBus()
-            .setAlert({
-              content: "Joke was not created!",
-              colorSchema: "danger"
-            });
+          this._jokeForm.getForm().setReady();
+          UU5.Environment.getPage().getAlertBus().setAlert({
+            content: "joke creation failed",
+            colorSchema: "danger"
+          });
           reject(dtoOut);
         }
+      })
+    });
+  },
+
+  _onLoad(dtoIn) {
+    return new Promise((resolve, reject) => {
+      Calls.getOneJoke({
+        data: dtoIn,
+        done: dtoOut => resolve(dtoOut),
+        fail: response => reject(response)
       });
     });
   },
@@ -74,18 +87,23 @@ export const JokeUpdate = UU5.Common.VisualComponent.create({
   //@@viewOn:render
   render() {
     return (
-      <UU5.Common.DataManager onUpdate={this._onUpdate} pessimistic>
-        {({ viewState, handleUpdate, data }) => {
+      <UU5.Common.DataManager
+        onUpdate={this._onUpdate}
+        onLoad={this._onLoad}
+        data={{ id: this.props.params.id }}
+        pessimistic
+      >
+        { ({ viewState, handleUpdate, data }) => {
+          console.log("", viewState);
           return (
-            <UU5.Bricks.Div {...this.getMainPropsToPass()}>
-                <JokeDetailForm ref_={component => (this._jokeDetailForm = component)}
-                                handleUpdate={handleUpdate}
-                                onSave={(opt) => this._onSave(opt, handleUpdate)}
-                                onCancel={({ component }) => this._onCancel(component)}
-                />
-            </UU5.Bricks.Div>
-          );
-        }}
+            <JokeDetailForm
+              ref_={component => (this._jokeForm = component)}
+              onSave={(opt) => {this._handleOnSave(opt, handleUpdate)}}
+              onCancel={(opt) => {this._handleOnCancel(opt)}}
+              initValue={data}
+            />
+          )
+        } }
       </UU5.Common.DataManager>
     );
   }

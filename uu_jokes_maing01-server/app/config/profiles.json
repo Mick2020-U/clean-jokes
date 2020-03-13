@@ -1,6 +1,6 @@
 {
   "{asid}": {
-    "profileList": ["Authorities","Executives","AwidOwner"],
+    "profileList": ["Authorities","Executives","AwidOwner","Public"],
     "permissionMap": {
       "{asidOwner}": ["AsidOwner"]
     },
@@ -14,6 +14,7 @@
       "defaultUve": ["Public"],
       "joke/create": ["Executives","Readers","Authorities"],
       "joke/list": ["Public"],
+      "joke/get": ["Public"],
       "joke/update": ["Public"],
       "joke/delete": ["Public"],
       "category/create": ["Public"],
@@ -29,6 +30,7 @@
       "uu-app-binarystore/getBinaryVersionData": ["Public"],
       "uu-app-binarystore/deleteBinaryVersion": ["Public"],
       "uu-app-binarystore/listBinaryVersions": ["Public"]
+
     }
   }
 }

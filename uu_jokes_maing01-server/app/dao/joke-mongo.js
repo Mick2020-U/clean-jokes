@@ -7,9 +7,9 @@ class JokeMongo extends UuObjectDao {
     await super.createIndex({ awid: 1, _id: 1 }, { unique: true });
   }
 
-  // async get(awid, id) {
-  //   return await super.findOne({ _id: id, awid: awid });
-  // }
+  async get(awid, id) {
+    return await super.findOne({ awid, id });
+  }
 
   async create(uuObject) {
     return await super.insertOne(uuObject);

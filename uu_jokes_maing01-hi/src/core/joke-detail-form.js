@@ -60,7 +60,8 @@ export const JokeDetailForm = UU5.Common.VisualComponent.create({
 
   //@@viewOn:render
   render() {
-    const {onSave, onCancel} = this.props;
+    const {onSave, onCancel, initValue} = this.props;
+    console.log(initValue, "initValue");
     return (
       <Context.Consumer>
         {({ joke, feedbacks, messages, onChange, onChangeFeedback }) => {
@@ -78,15 +79,16 @@ export const JokeDetailForm = UU5.Common.VisualComponent.create({
                   spacing={8}
                   onSave={onSave}
                   onCancel={onCancel}
+                  values={initValue}
                 >
                   <UU5.Forms.Text
-                    {...this._prepareCommonProps("name", ...commonParams)}
+                    name={"name"}
                     required={true}
                     placeholder={this.getLsiValue("namePlaceholder")}
                     size="s"
                   />
                   <UU5.Forms.TextArea
-                    {...this._prepareCommonProps("text", ...commonParams)}
+                    name={"text"}
                     placeholder={this.getLsiValue("textPlaceholder")}
                     spacing={16}
                     size="s"
