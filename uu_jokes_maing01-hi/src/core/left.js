@@ -87,7 +87,7 @@ export const Left = UU5.Common.VisualComponent.create({
           onCtrlClick={Tools.openNewTab}
         />
 
-        <LeftLink route="about">{this.getLsiComponent("about")}</LeftLink>
+        <LeftLink route="jokes">{this.getLsiComponent("jokes")}</LeftLink>
       </UU5.Bricks.Div>
     );
   }

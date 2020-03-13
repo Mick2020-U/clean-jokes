@@ -72,23 +72,14 @@ export const ContextProvider = UU5.Common.Component.create({
     this.setState(
 
       prevState => {
-
         let newJoke = UU5.Common.Tools.mergeDeep({}, prevState.joke);
-
         newJoke[componentName] = opt.value;
-
         return {
-
           joke: newJoke
-
         };
-
       },
-
       () => opt.component.onChangeDefault(opt)
-
     );
-
   },
 
   _onChangeFeedback(opt) {
@@ -128,11 +119,8 @@ export const ContextProvider = UU5.Common.Component.create({
   //@@viewOn:render
 
   render() {
-
     return <Context.Provider value={this.state}>{this.props.children}</Context.Provider>;
-
   }
-
 //@@viewOff:render
 });
 

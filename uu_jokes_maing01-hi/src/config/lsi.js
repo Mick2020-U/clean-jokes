@@ -9,9 +9,9 @@ const Lsi = {
       cs: "Vítejte",
       en: "Welcome"
     },
-    about: {
-      cs: "O aplikaci",
-      en: "About Application"
+    jokes: {
+      ua: "Жарти",
+      en: "Jokes"
     }
   },
 

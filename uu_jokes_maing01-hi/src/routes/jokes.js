@@ -108,23 +108,11 @@ export const Jokes = UU5.Common.VisualComponent.create({
                   tooltip={this.getLsiValue("jokesListHeader")}
                   level={3}/>
                 <UU5.Bricks.LanguageSelector displayedLanguages={["en", "uk"]}/>
-                <UU5.Bricks.Button content="Show Alert"
-                                   colorSchema="red"
-                                   onClick={this._showAlert}
-
-                />
-                <UU5.Bricks.Button content="Show Context Menu"
-                                   colorSchema="blue"
-                                   onClick={this._openContextMenu}
-
-                />
                 <UU5.Bricks.Button colorSchema="green"
                                    onClick={this._openCreateJokeRoute}
                 >
                   <UU5.Bricks.Icon icon="mdi-plus-circle"/> Create Joke
                 </UU5.Bricks.Button>
-                <UU5.Bricks.Button content="page leave" onClick={this._allowPageLeave} colorSchema="pink"/>
-
                 <UU5.Bricks.Row display="flex">
                   {data && data.data && this._getJokes(
                     data.data.itemList
