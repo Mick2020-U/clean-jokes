@@ -116,7 +116,6 @@ class JokeAbl {
         let foundJoke = await this.dao.get(awid, dtoIn.id);
 
         if (!foundJoke) {
-
           ValidationHelper.addWarning(
             uuAppErrorMap,
             WARNINGS.updateJoke.jokeDoesNotExist.code,
@@ -133,9 +132,9 @@ class JokeAbl {
         throw e;
       }
       try {
-        dtoIn.awid = awid;
+        // dtoIn.awid = awid;
 
-        dtoOut = await this.dao.update(dtoIn);
+        dtoOut = await this.dao.update({...dtoIn, awid});
       } catch (e) {
 
         if (e instanceof ObjectStoreError) {
@@ -143,8 +142,8 @@ class JokeAbl {
         }
         throw e;
     }
-    dtoOut.uuAppErrorMap = uuAppErrorMap;
-    return dtoOut;
+    // dtoOut.uuAppErrorMap = uuAppErrorMap;
+    return {...dtoOut, uuAppErrorMap};
   }
 
   async delete(awid, dtoIn) {

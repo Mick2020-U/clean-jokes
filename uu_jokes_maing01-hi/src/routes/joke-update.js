@@ -2,19 +2,19 @@
 import * as UU5 from "uu5g04";
 import "uu5g04-bricks";
 import Config from "./config/config.js";
-import Calls from "../calls.js";
+import ContextProvider from "../core/context-provider";
 import JokeDetailForm from "../core/joke-detail-form";
-import ContextProvider from "../core/context-provider.js";
+import Calls from "../calls";
 //@@viewOff:imports
 
-export const JokeDetail = UU5.Common.VisualComponent.create({
+export const JokeUpdate = UU5.Common.VisualComponent.create({
   //@@viewOn:mixins
-  mixins: [UU5.Common.BaseMixin, UU5.Common.RouteMixin],
+  mixins: [UU5.Common.BaseMixin],
   //@@viewOff:mixins
 
   //@@viewOn:statics
   statics: {
-    tagName: Config.TAG + "JokeDetail",
+    tagName: Config.TAG + "JokeUpdate",
     classNames: {
       main: (props, state) => Config.Css.css`background: rgba(0, 0, 0, 0.15); padding: 8px; margin: 8px 0;`
     }
@@ -41,11 +41,6 @@ export const JokeDetail = UU5.Common.VisualComponent.create({
     // component.setPending();
     typeof handleUpdate === "function" && handleUpdate(values);
 
-  },
-
-  _onCancel(component) {
-    alert("Cancel pressed");
-    return this;
   },
   _onUpdate(newData) {
     return new Promise((resolve, reject) => {
@@ -78,19 +73,16 @@ export const JokeDetail = UU5.Common.VisualComponent.create({
 
   //@@viewOn:render
   render() {
-    // UU5.Common.Tools.setLanguage("uk");
     return (
       <UU5.Common.DataManager onUpdate={this._onUpdate} pessimistic>
-        {({ viewState, handleUpdate }) => {
+        {({ viewState, handleUpdate, data }) => {
           return (
             <UU5.Bricks.Div {...this.getMainPropsToPass()}>
-              <ContextProvider>
                 <JokeDetailForm ref_={component => (this._jokeDetailForm = component)}
                                 handleUpdate={handleUpdate}
                                 onSave={(opt) => this._onSave(opt, handleUpdate)}
                                 onCancel={({ component }) => this._onCancel(component)}
                 />
-              </ContextProvider>
             </UU5.Bricks.Div>
           );
         }}
@@ -100,4 +92,4 @@ export const JokeDetail = UU5.Common.VisualComponent.create({
   //@@viewOff:render
 });
 
-export default JokeDetail;
+export default JokeUpdate;

@@ -32,9 +32,9 @@ export const Jokes = UU5.Common.VisualComponent.create({
 //@@viewOff:getDefaultProps
 
 //@@viewOn:reactLifeCycle
-  componentDidMount() {
-    UU5.Environment.getRouter().preventPageLeave();
-  },
+//   componentDidMount() {
+//     /*UU5.Environment.getRouter().preventPageLeave();*/
+//   },
 //@@viewOff:reactLifeCycle
 
 //@@viewOn:interface

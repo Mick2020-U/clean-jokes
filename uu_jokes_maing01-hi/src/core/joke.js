@@ -51,11 +51,12 @@ export const Joke = UU5.Common.VisualComponent.create({
   // },
   //@@viewOff:private
   _openJokeDetail() {
-    UU5.Environment.getPage().getModal()
+    UU5.Environment.setRoute("jokeUpdate", {id:this.props.id})
+    /*UU5.Environment.getPage().getModal()
       .open({
         header: <UU5.Bricks.Text content ={this.props.name} className={"uu5-common-singleline-ellipsis"}/> ,
         content: <JokeDetailModal joke = {this.props} content="fake content"/>
-      })
+      })*/
   },
   //@@viewOn:render
 

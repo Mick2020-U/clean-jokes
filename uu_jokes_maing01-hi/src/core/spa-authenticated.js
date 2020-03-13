@@ -12,6 +12,8 @@ import Home from "../routes/home.js";
 import Content from "./content";
 import Jokes from "../routes/jokes";
 import JokeDetail from "../routes/joke-detail";
+import JokeCreate from "../routes/joke-create";
+import JokeUpdate from "../routes/joke-update";
 //@@viewOff:imports
 
 const SpaAuthenticated = UU5.Common.VisualComponent.create({
@@ -75,6 +77,8 @@ const SpaAuthenticated = UU5.Common.VisualComponent.create({
             "": "jokes",
             jokes: { component: <Jokes identity={this.props.identity} /> },
             jokeDetail: {component: <JokeDetail identity={this.props.identity} />},
+            jokeCreate: {component: <JokeCreate identity={this.props.identity} />},
+            jokeUpdate: {component: <JokeUpdate identity={this.props.identity} />},
             /*"joke/list" : {component: <Jokes identity={this.props.identity} />},*/
             about: { component: <About identity={this.props.identity} /> },
           }}
