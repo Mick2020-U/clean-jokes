@@ -23,7 +23,9 @@ export const JokeDetailForm = UU5.Common.VisualComponent.create({
 
   //@@viewOn:propTypes
   propTypes: {
-    handleUpdate: UU5.PropTypes.func
+    handleUpdate: UU5.PropTypes.func,
+    onSave: UU5.PropTypes.func,
+    onCancel: UU5.PropTypes.func
   },
   //@@viewOff:propTypes
 
@@ -43,17 +45,6 @@ export const JokeDetailForm = UU5.Common.VisualComponent.create({
   //@@viewOff:overriding
 
   //@@viewOn:private
-  _onSave(component, values) {
-    // component.setPending();
-    typeof this.props.handleUpdate === "function" && this.props.handleUpdate(values);
-    return this;
-  },
-
-  _onCancel(component) {
-    alert("Cancel pressed");
-    return this;
-  },
-
   _prepareCommonProps(componentName, joke, feedbacks, messages, onChange, onChangeFeedback) {
     return {
       name: componentName,
@@ -69,6 +60,7 @@ export const JokeDetailForm = UU5.Common.VisualComponent.create({
 
   //@@viewOn:render
   render() {
+    const {onSave, onCancel} = this.props;
     return (
       <Context.Consumer>
         {({ joke, feedbacks, messages, onChange, onChangeFeedback }) => {
@@ -84,8 +76,8 @@ export const JokeDetailForm = UU5.Common.VisualComponent.create({
                   labelColWidth="xs-12 s-12 m-3 l-2 xl-2"
                   inputColWidth="xs-12 s-12 m-8 l-9 xl-9"
                   spacing={8}
-                  onSave={({ component, values }) => this._onSave(component, values)}
-                  onCancel={({ component }) => this._onCancel(component)}
+                  onSave={onSave}
+                  onCancel={onCancel}
                 >
                   <UU5.Forms.Text
                     {...this._prepareCommonProps("name", ...commonParams)}

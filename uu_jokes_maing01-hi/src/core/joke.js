@@ -59,8 +59,9 @@ export const Joke = UU5.Common.VisualComponent.create({
   //@@viewOn:render
 
   render() {
+    console.log(this.props, "this.props");
     return <UU5.Bricks.Column {...this.getMainPropsToPass()} colWidth="xs-12 s-6 m-6 l-4 xl-3">
-      <UU5.Bricks.Card
+      {/*<UU5.Bricks.Card
         header={<UU5.Bricks.Text content={this.props.joke.name} classname={"uu5-common-singleline-ellipsis"}/>}
         footer={<UU5.Bricks.Button content="open Detail" onClick={this._openJokeDetail}/>}
         level={6}
@@ -71,7 +72,7 @@ export const Joke = UU5.Common.VisualComponent.create({
         <UU5.Bricks.Text content={this.props.joke.image}
                tooltip={this.props.joke.image}
               level={6} classname={"uu5-common-singleline-ellipsis"}/>}
-      </UU5.Bricks.Card>
+      </UU5.Bricks.Card>*/}
     </UU5.Bricks.Column>;
   },
   //@@viewOff:render

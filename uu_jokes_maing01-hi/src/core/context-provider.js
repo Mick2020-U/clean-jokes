@@ -6,19 +6,14 @@ import Context from "./context.js";
 //@@viewOff:imports
 
 export const ContextProvider = UU5.Common.Component.create({
-
 //@@viewOn:mixins
-
   mixins: [UU5.Common.BaseMixin],
-
 //@@viewOff:mixins
 
   //@@viewOn:statics
 
   statics: {
-
     tagName: Config.TAG + "ContextProvider"
-
   },
 
 //@@viewOff:statics
@@ -34,9 +29,7 @@ export const ContextProvider = UU5.Common.Component.create({
   //@@viewOn:reactLifeCycle
 
   getInitialState() {
-
     return {
-
       joke: {},
 
       feedbacks: {},

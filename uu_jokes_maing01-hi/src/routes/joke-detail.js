@@ -37,6 +37,16 @@ export const JokeDetail = UU5.Common.VisualComponent.create({
   //@@viewOff:overriding
 
   //@@viewOn:private
+  _onSave({component, values}, handleUpdate) {
+    // component.setPending();
+    typeof handleUpdate === "function" && handleUpdate(values);
+
+  },
+
+  _onCancel(component) {
+    alert("Cancel pressed");
+    return this;
+  },
   _onUpdate(newData) {
     return new Promise((resolve, reject) => {
       Calls.createJoke({
@@ -75,7 +85,11 @@ export const JokeDetail = UU5.Common.VisualComponent.create({
           return (
             <UU5.Bricks.Div {...this.getMainPropsToPass()}>
               <ContextProvider>
-                <JokeDetailForm ref_={component => (this._jokeDetailForm = component)} handleUpdate={handleUpdate} />
+                <JokeDetailForm ref_={component => (this._jokeDetailForm = component)}
+                                handleUpdate={handleUpdate}
+                                onSave={(opt) => this._onSave(opt, handleUpdate)}
+                                onCancel={({ component }) => this._onCancel(component)}
+                />
               </ContextProvider>
             </UU5.Bricks.Div>
           );
