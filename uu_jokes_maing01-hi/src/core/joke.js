@@ -5,7 +5,7 @@ import Config from "./config/config.js";
 import Calls from "../calls";
 import JokeDetailModal from "./joke-detail-modal";
 //@@viewOff:imports
-
+import "./joke.less"
 export const Joke = UU5.Common.VisualComponent.create({
   //@@viewOn:mixins
   mixins: [UU5.Common.BaseMixin],
@@ -15,7 +15,8 @@ export const Joke = UU5.Common.VisualComponent.create({
   statics: {
     tagName: Config.TAG + "Joke",
     classNames: {
-      main: (props, state) => Config.Css.css`background: rgba(0, 0, 0, 0.15); padding: 8px; margin: 8px 0;`
+      main: (props, state) => Config.Css.css`background: rgba(0, 0, 0, 0.15); padding: 8px; margin: 8px 0;`,
+      cardStyle: Config.Css.css`height: 100%;`
     }
   },
   //@@viewOff:statics
@@ -50,30 +51,32 @@ export const Joke = UU5.Common.VisualComponent.create({
   // },
   //@@viewOff:private
   _openJokeDetail() {
-   // UU5.Environment.setRoute("jokeDetail", {id: this.props.joke.id});
-   UU5.Environment.getPage().getModal().open({
-     header: "joke",
-     content: <JokeDetailModal joke={this.props.joke}/>
-   });
+    UU5.Environment.getPage().getModal()
+      .open({
+        header: <UU5.Bricks.Text content ={this.props.name} className={"uu5-common-singleline-ellipsis"}/> ,
+        content: <JokeDetailModal joke = {this.props} content="fake content"/>
+      })
   },
   //@@viewOn:render
 
   render() {
-    console.log(this.props, "this.props");
-    return <UU5.Bricks.Column {...this.getMainPropsToPass()} colWidth="xs-12 s-6 m-6 l-4 xl-3">
-      {/*<UU5.Bricks.Card
-        header={<UU5.Bricks.Text content={this.props.joke.name} classname={"uu5-common-singleline-ellipsis"}/>}
+    const { name, text } = this.props;
+    return (
+      <UU5.Bricks.Card
+        header={<UU5.Bricks.Text content={name} classname={"uu5-common-singleline-ellipsis"}/>}
         footer={<UU5.Bricks.Button content="open Detail" onClick={this._openJokeDetail}/>}
         level={6}
         bgStyle="outline"
-        className={"uu5-common-padding-s"}>
-        {this.props.joke.text && <UU5.Bricks.Text content={this.props.joke.text}/>}
-        {this.props.joke.image &&
-        <UU5.Bricks.Text content={this.props.joke.image}
-               tooltip={this.props.joke.image}
-              level={6} classname={"uu5-common-singleline-ellipsis"}/>}
-      </UU5.Bricks.Card>*/}
-    </UU5.Bricks.Column>;
+        className={"uu5-common-padding-s joke"}
+      >
+        {text && <UU5.Bricks.Text content={text}/>}
+        {/*{this.props.joke.image &&*/}
+        {/*<UU5.Bricks.Text content={this.props.joke.image}*/}
+        {/*       tooltip={this.props.joke.image}*/}
+        {/*      level={6} classname={"uu5-common-singleline-ellipsis"}/>*/}
+
+      </UU5.Bricks.Card>)
+
   },
   //@@viewOff:render
 
